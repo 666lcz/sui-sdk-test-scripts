@@ -1,0 +1,14 @@
+{
+  "name": "sui-sdk-test-scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "author": "Chris Li",
+  "license": "ISC",
+  "dependencies": {
+    "@mysten/sui.js": "^0.11.0"
+  }
+}
