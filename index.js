@@ -17,7 +17,8 @@ async function main() {
     provider,
     new LocalTxnDataSerializer(provider)
   );
-  const result = await signer.signAndExecuteTransaction({
+
+  const tx = {
     kind: 'moveCall',
     data: {
       packageObjectId: '0x2',
@@ -31,8 +32,26 @@ async function main() {
       ],
       gasBudget: 1000,
     },
-  });
-  console.log(result);
+  };
+
+  console.log("txn", JSON.stringify(tx, null, 2));
+
+  const transactionKind =  await new LocalTxnDataSerializer(provider).constructTransactionKindAndPayment(address, tx);
+
+  console.log("transaction kind", JSON.stringify(transactionKind, null, 2));
+
+  const devInspectTxBytes = 
+    await new LocalTxnDataSerializer(provider).serializeToBytesWithoutGasInfo(
+      address,
+      tx,
+    );
+
+  console.log("bcs bytes", JSON.stringify(devInspectTxBytes.getData()));
+
+  console.log("base64 bytes", devInspectTxBytes.toString());
+
+  const result = await signer.devInspectTransaction(tx);
+  console.log("DevInspect result", JSON.stringify(result, null, 2));
 }
 
 main().catch(console.error);
