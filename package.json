@@ -9,6 +9,7 @@
   "author": "Chris Li",
   "license": "ISC",
   "dependencies": {
-    "@mysten/sui.js": "^0.30.0"
+    "@mysten/sui.js": "^0.35.1",
+    "@mysten/bcs": "^0.7.1"
   }
 }
